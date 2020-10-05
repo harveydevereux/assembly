@@ -4,27 +4,16 @@ empty:    .ascii " "
 end:      .ascii "\n"
 n:        .ascii " "
 
-.text
 .global _start
 _start:
   push  {r11, lr}
   add   r11, sp, #0
   sub   sp, sp, #16
 
-  mov   r3, #11
-  .LOOP:
-    sub   r3, r3, #1
-    cmp   r3, #0
-    mov   r0, r3
-    bl    print_digit
-    bgt   .LOOP
-  .ENDLOOP:
-
   /* exit */
   mov     r7, #1
   swi     0
 
-/* prints a single digits (<10) */
 print_digit:
   /* store current state */
   push  {r11}
@@ -54,3 +43,9 @@ print_digit:
   add   sp, r11, #0
   pop   {r11}
   bx    lr
+
+/* use modular arithmatic in a loop to get
+   digits to print with print_digit */
+print_digits:
+
+factorial:
