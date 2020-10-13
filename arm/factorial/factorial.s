@@ -10,10 +10,16 @@ _start:
   add   r11, sp, #0
   sub   sp, sp, #16
 
+  mov   r0, #3
+  bl    print_digit
+
+  sub   sp, r11, #0
+	pop   {r11, pc}
   /* exit */
   mov     r7, #1
   swi     0
 
+/* prints a single digits (<10) */
 print_digit:
   /* store current state */
   push  {r11}
